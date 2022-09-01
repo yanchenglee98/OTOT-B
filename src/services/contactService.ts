@@ -15,6 +15,15 @@ const createContact =async (name:string, email:string, phone:string) => {
     return newContact;
 };
 
+const getAllContacts =async () => {
+    console.log(`getting all contacts`);
+    const retrievedContacts = await ContactRepo.getAllContacts();
+    if (!retrievedContacts) {
+        throw new Error(`Failed to retrieved all contacts`);
+    }
+    return retrievedContacts;
+}
+
 const updateContact =async (id:string, updatedContactFields: ContactUpdateOptions) => {
     console.log(`updating contact`);
     const updatedContact = await ContactRepo.updateContact(id, updatedContactFields);
@@ -44,6 +53,7 @@ const deleteContact =async (id:string) => {
 
 const ContactService = {
     createContact,
+    getAllContacts,
     updateContact,
     getContact,
     deleteContact,

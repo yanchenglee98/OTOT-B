@@ -16,6 +16,15 @@ export default(app: Router) => {
             res.json(newContact).status(200);
         }),
     );
+    
+    // get all 
+    route.get(
+        '/',
+        wrap(async(req:Request, res:Response) => {
+            const retrievedContacts = await ContactService.getAllContacts();
+            res.json(retrievedContacts).status(200);
+        })
+    )
 
     // retrieve
     route.get(

@@ -6,6 +6,11 @@ const createContact =async (contact:Contact) => {
     return newContact;
 };
 
+const getAllContacts =async () => {
+    const contacts = await ContactModel.find();
+    return contacts;
+}
+
 const updateContact =async (id:string, updatedContactFields: ContactUpdateOptions) => {
     const updatedContact = await ContactModel.findByIdAndUpdate(id, updatedContactFields, {
         new: true,
@@ -25,6 +30,7 @@ const deleteContact =async (id:string) => {
 
 const ContactRepo = {
     createContact,
+    getAllContacts,
     updateContact,
     getContact,
     deleteContact,
