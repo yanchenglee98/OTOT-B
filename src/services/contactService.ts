@@ -2,7 +2,7 @@ import { ContactUpdateOptions } from "../models/contactModel";
 import ContactRepo from "../repository/contactRepo";
 
 const createContact =async (name:string, email:string, phone:string) => {
-    console.log(`creating contact`);
+    console.log(`creating ${name} contact`);
     const newContact = await ContactRepo.createContact({
         name,
         email,
@@ -25,11 +25,12 @@ const getAllContacts =async () => {
 }
 
 const updateContact =async (id:string, updatedContactFields: ContactUpdateOptions) => {
-    console.log(`updating contact`);
+    console.log(`updating ${id} contact`);
     const updatedContact = await ContactRepo.updateContact(id, updatedContactFields);
     if (!updatedContact) {
         throw new Error(`Failed to update ${id}`)
     }
+    console.log(`updated ${updatedContact.name} contact`)
     return updatedContact;
 };
 
@@ -39,15 +40,17 @@ const getContact =async (id:string) => {
     if (!retrievedContact) {
         throw new Error(`Contact ${id} does not exist`)
     }
+    console.log(`retrieved ${retrievedContact.name} contact`)
     return retrievedContact;
 }
 
 const deleteContact =async (id:string) => {
-    console.log(`delete contact`);
+    console.log(`deleting contact`);
     const deletedContact = await ContactRepo.deleteContact(id);
     if (!deletedContact) {
         throw new Error(`Contact ${id} does not exist`)
     }
+    console.log(`deleted ${deletedContact.name} contact`)
     return deletedContact;
 }
 
