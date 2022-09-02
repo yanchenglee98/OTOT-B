@@ -19,7 +19,7 @@ const getAllContacts =async () => {
     console.log(`getting all contacts`);
     const retrievedContacts = await ContactRepo.getAllContacts();
     if (!retrievedContacts) {
-        throw new Error(`Failed to retrieved all contacts`);
+        throw new Error(`Failed to retrieve all contacts`);
     }
     return retrievedContacts;
 }
