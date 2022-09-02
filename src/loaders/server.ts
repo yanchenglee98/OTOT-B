@@ -14,4 +14,8 @@ export default (app: express.Application) => {
   app.use('/api', routes);
   // Send message for default URL
   app.get('/', (req, res) => res.send('Hello World with Express'));
+
+  app.use((err, req, res, next) => {
+    res.status(500).send({error: err.message, stack: err.stack});
+  });
 };
