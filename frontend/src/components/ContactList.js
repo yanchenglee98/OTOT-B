@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function ContactList() { // function name ContactList is capitalised so it will be a react function 
     // use react hooks to manage states
@@ -8,8 +9,8 @@ export default function ContactList() { // function name ContactList is capitali
     const [contacts, setContacts] = useState([]);
     const [newContact, setNewContact] = useState(null);
     const sampleContacts = [
-        {title:'john doe'},
-        {title:'jane doe'}
+        {name:'john doe', email: 'johndoe@gmail.com', number: '98765432'},
+        {name:'jane doe', email: 'janedoe@gmail.com', number: '12345678'}
     ];
 
     // save contacts to local storage
@@ -30,7 +31,7 @@ export default function ContactList() { // function name ContactList is capitali
     // useEffect react hook used to run some kind of side effect that we want to actually happen when out app loads
     useEffect(()=> {
         getContacts();
-    }, [contacts]); // run this effect hook whenever something changes in this array else it will keep rendering
+    }, []); // run this effect hook whenever something changes in this array else it will keep rendering
 
     const getContactsToRender = () => {
         return contacts.map((contact, idx) => {
@@ -38,7 +39,11 @@ export default function ContactList() { // function name ContactList is capitali
                 // mt-3 defines margins
                 <div className="columns contact mt-3 is-vcentered"> 
                     <div className="column has-text-left">
-                        <div key={idx}>{contact.title}</div>
+                        <div key={idx}>
+                            <div>{contact.name}</div>
+                            <div>{contact.email}</div>
+                            <div>{contact.number}</div>
+                        </div>
                     </div>
                     <div className="column is-narrow">
                         <div className="buttons">
@@ -63,19 +68,79 @@ export default function ContactList() { // function name ContactList is capitali
 
     const handleAddNewContact = () => {
         const newContactList = [...contacts];
-        newContactList.push({title: newContact});
+        newContactList.push({name: newContact});
         setContacts(newContactList);
+    }
+
+    // form 
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: {errors},
+    } = useForm();
+
+    const onSubmit = (data) => console.log(data);
+
+    const Form = () => {
+        return (
+            <form className="has-text-left" onSubmit={handleSubmit(onSubmit)}>
+                <div className="field">
+                    <label className="label">Name</label>
+                    <div className="control">
+                        <input 
+                            className="input"
+                            type="text"
+                            placeholder="Name"
+                            {...register("name", {required:true, maxLength:80})}
+                        />
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Email</label>
+                    <div className="control">
+                        <input 
+                            className="input"
+                            type="text"
+                            placeholder="hello@mail.com"
+                            {...register("email", {required:true, maxLength:80})}
+                        />
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Number</label>
+                    <div className="control">
+                        <input 
+                            className="input"
+                            type="text"
+                            placeholder="98765432"
+                            {...register("number", {required:true, maxLength:80})}
+                        />
+                    </div>
+                </div>
+
+                <div className="control">
+                    <button className="button is-link" type="submit">
+                        Submit
+                    </button>
+                </div>
+                
+            </form>
+        );
     }
 
     return (
             <div>
-                <input 
+                <div>{Form()}</div>
+                {/* <input 
                     className="input is-primary"
                     type = "text"
                     placeholder="Primary input"
                     onChange={handleInputChanged}
                 />
-                <button className="button is-link mt-3 is-fullwidth" onClick={handleAddNewContact}>Add Contact</button>
+                <button className="button is-link mt-3 is-fullwidth" onClick={handleAddNewContact}>Add Contact</button> */}
                 <hr/>
                 <div className="contactList">{getContactsToRender()}</div>
             </div> // any kind of javascript or logic needs to be enclosed with curly brackets
