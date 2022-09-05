@@ -6,6 +6,18 @@ import ContactList from './components/ContactList';
 function App() {
   return (
     <div className="App">
+
+      <section className="hero is-primary">
+        <div className="hero-body">
+          <p className="title">
+            Contacts Management App
+          </p>
+          <p className="subtitle">
+            Done in react 
+          </p>
+        </div>
+      </section>
+      
       <div className='container'>
         <div className='columns is-centered'>
           <div className='column is-half'>

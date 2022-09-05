@@ -3,6 +3,10 @@ import axios from 'axios';
 const baseURL = "http://localhost:3000/api/contacts";
 
 class ContactApi {
+    createContact(data) {
+        return axios.post(baseURL, data);
+    }
+
     getAllContacts() {
         return axios.get(baseURL);
     }

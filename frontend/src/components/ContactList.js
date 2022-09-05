@@ -9,7 +9,6 @@ export default function ContactList() { // function name ContactList is capitali
     // setContacts is a function to update contacts
     // for now it will be hard coded, TODO: pull from API 
     const [contacts, setContacts] = useState([]);
-    const [newContact, setNewContact] = useState(null);
     const sampleContacts = [
         {name:'john doe', email: 'johndoe@gmail.com', phone: '98765432'},
         {name:'jane doe', email: 'janedoe@gmail.com', phone: '12345678'}
@@ -63,6 +62,7 @@ export default function ContactList() { // function name ContactList is capitali
     }
 
     const handleAddNewContact = (data) => {
+        ContactApi.createContact(data);
         const newContactList = [...contacts];
         newContactList.push({name: data.name, email: data.email, phone:data.phone});
         setContacts(newContactList);
