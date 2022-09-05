@@ -66,9 +66,9 @@ export default function ContactList() { // function name ContactList is capitali
         setNewContact(event.target.value);
     }
 
-    const handleAddNewContact = () => {
+    const handleAddNewContact = (data) => {
         const newContactList = [...contacts];
-        newContactList.push({name: newContact});
+        newContactList.push({name: data.name, email: data.email, number:data.number});
         setContacts(newContactList);
     }
 
@@ -80,7 +80,10 @@ export default function ContactList() { // function name ContactList is capitali
         formState: {errors},
     } = useForm();
 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = (data) => {
+        console.log(data);
+        handleAddNewContact(data);
+    }
 
     const Form = () => {
         return (
