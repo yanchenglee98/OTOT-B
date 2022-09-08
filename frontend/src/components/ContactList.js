@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import ContactApi from "../api/ContactApi";
+import WeatherApi from "../api/WeatherApi";
 
 export default function ContactList() { // function name ContactList is capitalised so it will be a react function 
     // use react hooks to manage states
@@ -9,6 +10,7 @@ export default function ContactList() { // function name ContactList is capitali
     // setContacts is a function to update contacts
     // for now it will be hard coded, TODO: pull from API 
     const [contacts, setContacts] = useState([]);
+    const [weather, setWeather] = useState("Sunny");
     const sampleContacts = [
         {name:'john doe', email: 'johndoe@gmail.com', phone: '98765432'},
         {name:'jane doe', email: 'janedoe@gmail.com', phone: '12345678'}
@@ -25,6 +27,12 @@ export default function ContactList() { // function name ContactList is capitali
                     setContacts(sampleContacts);
                 }
             })
+        if (false) { // to switch on or off getting the weather to save money on google cloud function 
+        WeatherApi.getWeather()
+            .then((res)=> {
+                setWeather(res.data['forecast']);
+            })
+        }
     }, []);// run this effect hook whenever something changes in this array else it will keep rendering
  
 
@@ -132,6 +140,7 @@ export default function ContactList() { // function name ContactList is capitali
 
     return (
             <div>
+                <div>Today's weather is {weather}</div>
                 <div>{Form()}</div>
                 <hr/>
                 <div className="contactList">{getContactsToRender()}</div>
