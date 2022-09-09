@@ -111,7 +111,7 @@ export default function ContactList() { // function name ContactList is capitali
                             className="input"
                             type="text"
                             placeholder="hello@mail.com"
-                            {...register("email", {required:true, maxLength:80})}
+                            {...register("email", {required:true, maxLength:80, pattern:/^\S+@\S+$/i,})}
                         />
                     </div>
                 </div>
