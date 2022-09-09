@@ -5,12 +5,8 @@ export default () => {
       description: 'Local', // name
     },
     {
-      url: 'https://otottaskb1.herokuapp.com/api', // url
-      description: 'Heroku', // name
-    },
-    {
       url: 'https://otottaskb.as.r.appspot.com/api', // url
-      description: 'Google Cloud App Enginge', // name
-    }
+      description: 'Google Cloud App Engine', // name
+    },
   ];
 };
