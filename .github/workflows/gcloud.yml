@@ -9,6 +9,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+        - uses: actions/checkout@v3
+      - uses: golang-enthusiast/app-yaml-env-compiler@v1.0
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
       - name: Auth
         id: auth
         uses: 'google-github-actions/auth@v0'
