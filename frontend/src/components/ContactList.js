@@ -27,10 +27,10 @@ export default function ContactList() { // function name ContactList is capitali
                     setContacts(sampleContacts);
                 }
             })
-        if (false) { // to switch on or off getting the weather to save money on google cloud function 
-        WeatherApi.getWeather()
-            .then((res)=> {
-                setWeather(res.data['forecast']);
+        if (true) { // to switch on or off getting the weather to save money on google cloud function 
+            WeatherApi.getWeather()
+                .then((res)=> {
+                    setWeather(res.data['forecast']);
             })
         }
     }, []);// run this effect hook whenever something changes in this array else it will keep rendering
