@@ -51,7 +51,6 @@ export default function ContactList() { // function name ContactList is capitali
                     </div>
                     <div className="column is-narrow">
                         <div className="buttons">
-                            <button className="button is-success">View</button>
                             <button className="button is-danger" onClick={() => handleDeleteContact(contact, idx)}>Delete</button>
                         </div>
                     </div>
