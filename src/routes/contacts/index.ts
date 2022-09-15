@@ -12,12 +12,8 @@ export default(app: Router) => {
         '/',
         wrap(async (req:Request, res:Response) => {
             const {name, email, phone} = req.body;
-            if (name && email && phone) {
-                const newContact = await ContactService.createContact(name, email, phone);
-                res.json(newContact).status(200);
-            } else {
-                res.status(400).send({'error': 'bad request: missing parameters'});
-            }
+            const newContact = await ContactService.createContact(name, email, phone);
+            res.json(newContact).status(200);
         }),
     );
     

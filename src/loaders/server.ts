@@ -16,13 +16,6 @@ export default (app: express.Application) => {
   app.get('/', (req, res) => res.send('Hello World with Express'));
 
   app.use((err, req, res, next) => {
-    // hard coded check for contact does not exist which is supposed to return 404
-    // TODO: implement NotFoundError to check for not found 
-    // can reference this website: https://medium.com/learn-with-talkrise/custom-errors-with-node-express-27b91fe2d947
-    if (err.message.includes("does not exist")) {
-      res.status(404).send({error: err.message, stack: err.stack});
-    } else {
-      res.status(500).send({error: err.message, stack: err.stack});
-    }
+    res.status(err.status).json({ message: err.message });
   });
 };
